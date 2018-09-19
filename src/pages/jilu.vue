@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="tableBox">
+		<div class="searchBox">
 			<div class="searchList">
 				<div class="searchTitle">项目名称/编号：</div>
 				<el-input class="inputs"></el-input>
@@ -17,7 +17,11 @@
 			</div>
 			<div class="button danger">查询</div>
 			<div class="button">导出</div>
-			<el-table :data="tableData" stripe style="width: 100%" :header-row-style="thStyle()">
+		</div>
+		<div class="tableBox">
+			
+			
+			<el-table :data="tableData" style="width: 100%" :header-cell-style="{background:'#FAFAFA',color:'#333',fontSize:'16px'}">
 				<el-table-column prop="name" label="课程编号"  align='center'></el-table-column>
 		    <el-table-column prop="phone" label="授课时间" align='center'></el-table-column>
 		    <el-table-column prop="activeName" label="课程名称"  align='center'></el-table-column>
@@ -293,13 +297,6 @@
         this.searchData.pageNo = val;
         this.search();
 	    },
-	    //表头样式
-			thStyle() {
-				return {
-					color: "#333",
-					fontSize: "16px",
-				}
-			},
     },
     
   }

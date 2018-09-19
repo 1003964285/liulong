@@ -16,7 +16,7 @@
         </div>
         <div class="itemBox" style="border:none">
           <div class="titleColor">剩余</div>
-          <h2>{{totalClassCount.totalClass - totalClassCount.planClass - totalClassCount.endClass}}课时</h2>
+          <h2>{{ totalClassCount.leftClass }}课时</h2>
         </div>
       </div>
     </div>
@@ -32,13 +32,16 @@
         <div class="weeks" v-for="item in week">{{item}}</div>
       </div>
       <div id="calendarBox">
-        <div class="calendar" @click="show=true" :class="{borderNone:!item.date,calendarSelected:item.course}"
+        <div class="calendar" @click="isShow(item)" :class="{borderNone:!item.date,calendarSelected:item.course}"
              v-for="item in dates">
           <!--<div class="calendar"  v-for="item in calendar">-->
           <div class="dateBox" :class="{datasSelected:item.course}">{{item.date}}</div>
-          <span class="time">{{item.time}}</span><br/>
-          <span class="course">{{item.course}}</span><br/>
-          <span class="name">{{item.name}}</span>
+          <div class="textbox">
+          	<span class="time">{{item.time}}</span><br/>
+	          <span class="course">{{item.course}}</span><br/>
+	          <span class="name">{{item.name}}</span>
+          </div>
+
         </div>
       </div>
     </div>
@@ -50,37 +53,27 @@
           <span style="cursor:pointer" @click="show=false">×</span>
         </div>
         <div class="courseBox">
-          <div class="courseTitle">课程日期：8月12日</div>
+          <div class="courseTitle">课程日期：{{this.Date.getMonth() + 1 + '月' + classes.date + '号'}}</div>
           <div style="border:1px solid rgba(228,228,228,1);padding:20px 20px 0 20px;border-top:none">
-            <div class="listbox">
+            <div class="listbox" v-for="(item,index) in classes.classes">
               课程时间:
-              <el-time-select class="selects" v-model="aa" :picker-options="{start: '08:30',step: '00:30',end: '18:30'}"
+              <el-time-select class="selects" v-model="item.time"
+                              :picker-options="{start: '08:30',step: '00:30',end: '18:30'}"
                               placeholder=""></el-time-select>
               课程内容:
-              <el-select class="selects" v-model="aa" clearable placeholder="请选择">
+              <el-select class="selects" v-model="item.course" clearable placeholder="请选择">
                 <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
               </el-select>
               &nbsp&nbsp
-              <i class="iconfont icon-shanchu"></i>
-            </div>
-            <div class="listbox">
-              课程时间:
-              <el-time-select class="selects" v-model="aa" :picker-options="{start: '08:30',step: '00:30',end: '18:30'}"
-                              placeholder=""></el-time-select>
-              课程内容:
-              <el-select class="selects" v-model="aa" clearable placeholder="请选择">
-                <el-option v-for="item in status" :key="item.value" :label="item.label" :value="item.value"></el-option>
-              </el-select>
-              &nbsp&nbsp
-              <i class="iconfont icon-shanchu"></i>
+              <i class="iconfont icon-shanchu" @click="deleteClass(index)"></i>
             </div>
           </div>
-          <div class="addBox"><span class="add">添加</span></div>
+          <div class="addBox" @click="addClasses()"><span class="add">添加</span></div>
         </div>
         <div class="btnBox">
 					<span>
 						<span class="button" style="margin-left: 20px;" @click="show=false">取消</span>
-						<span class="button danger">保存</span>
+						<span class="button danger" @click="saveClasses">保存</span>
 					</span>
         </div>
       </div>
@@ -112,6 +105,8 @@
         </div>
       </div>
     </div>
+
+
   </div>
 
 </template>
@@ -127,7 +122,8 @@
     //获取课时汇总
     totalClass,
     //按月获取课时
-    classByMonth
+    classByMonth,
+    saveClasses
   } from "@/config/api.js";
 
   export default {
@@ -136,11 +132,16 @@
         totalClassCount: {
           "id": "0", "totalClass": 0, "planClass": 0, "endClass": 0, "leftClass": 0
         },
-        aa: '',
         week: ['日', '一', '二', '三', '四', '五', '六'],
-        res: [],
+        res: [
+        	{time:'19:50',course:'肩颈康复课',name:'刘龙',date:'4'},
+        	{time:'19:50',course:'肩颈康复课',name:'刘龙',date:'16'},
+        	{time:'19:50',course:'肩颈康复课',name:'刘龙',date:'21'},
+        ],
         dates: [],
         Date: '',
+        classes: {
+        },
         month: '',
         show: false,
         sales: false,
@@ -156,22 +157,41 @@
       this.Date = new Date();
       this.month = this.Date.getFullYear() + '年' + (this.Date.getMonth() + 1) + '月';
       this.createDate(this.Date);
-      this.getTotalClass();
     },
     methods: {
-      async getTotalClass() {
-        try {
-          let res = await totalClass();
-          this.totalClassCount = res.data;
-          let condition = this.Date.getTime();
-          console.log(condition);
-          let res2 = await classByMonth(condition);
-          console.log(res2.data)
-          this.$Set(this, 'res', res2.data);
-          console.log(this.res)
-        } catch (e) {
+      async saveClasses(){
+        try{
+          let date = this.Date;
+          date.setDate(this.classes.date);
+          let request = {
+            date: date,
+            contents: this.classes.classes
+          };
+          let res = await saveClasses(request);
+        }catch (e) {
 
         }
+
+      },
+      deleteClass(index) {
+        this.classes.classes.splice(index, 1)
+      },
+      addClasses() {
+        let myClass = {
+          time: '08:30'
+        };
+        console.log(this.classes.classes);
+        // this.classes.classes.push(myClass)
+        this.$set(this.classes,'classes', myClass)
+      },
+      isShow(item) {
+        if (item.date){
+          this.show = true;
+        }
+        if (!item.classes){
+          item.classes = []
+        }
+        this.classes = item;
       },
       createDate(date_) {
         this.dates = [];
@@ -216,6 +236,7 @@
               this.$set(this.dates[i], 'time', this.res[j].time);
               this.$set(this.dates[i], 'course', this.res[j].course);
               this.$set(this.dates[i], 'name', this.res[j].name);
+              this.$set(this.dates[i], 'classes', this.res[j].classes);
             }
           }
         }
@@ -223,12 +244,15 @@
 
 
       up() {
+        this.res = [];
         let upMonth = this.Date.getMonth() - 1;
         this.Date.setMonth(upMonth);
         this.month = this.Date.getFullYear() + '年' + (this.Date.getMonth() + 1) + '月';
-        this.createDate(this.Date)
+        this.createDate(this.Date);
+        console.log(Date.parse(this.Date));
       },
       next() {
+        this.res = [];
         let upMonth = this.Date.getMonth() + 1;
         this.Date.setMonth(upMonth);
         this.month = this.Date.getFullYear() + '年' + (this.Date.getMonth() + 1) + '月';
@@ -269,7 +293,7 @@
     padding: 20px;
     background: rgba(255, 255, 255, 1);
     border-radius: 2px;
-    margin-top: 20px;
+    margin-top:10px;
     font-family: PingFangSC-Medium;
   }
 
@@ -277,11 +301,11 @@
     width: 1024px;
     border-radius: 4px 4px 0px 0px;
     margin: 0 auto;
-    margin-top: 15px;
+    margin-top:10px;
   }
 
   .weeks {
-    line-height: 54px;
+    line-height:40px;
     width: 146px;
     background: rgba(250, 250, 250, 1);
     display: inline-block;
@@ -300,15 +324,23 @@
     display: inline-block;
     text-align: center;
     width: 147px;
-    height: 128px;
+    /*height: 128px;*/
+    height: 104px;
     border: 1px solid #e3e3e3;
     padding: 10px;
     font-size: 13px;
     margin: -5px 0 0 -1px;
+    position:relative;
   }
-
   .calendar:hover {
     background: rgba(230, 230, 230, 1);
+  }
+  .textbox{
+  	width: 90%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
   }
 
   .dateBox {
@@ -397,6 +429,7 @@
     min-height: 280px;
     height: auto;
     border-radius: 5px;
+    max-height: 900px;
   }
 
   .dialogTitle {
@@ -428,6 +461,9 @@
     padding: 0 10px;
     font-size: 14px;
     color: rgba(102, 102, 102, 0.85);
+    max-height: 629px;
+    overflow: hidden;
+    overflow-y: scroll;
   }
 
   .courseTitle {
@@ -473,7 +509,7 @@
     color: rgba(0, 0, 0, 0.65);
     line-height: 32px;
     margin: 0 auto;
-    margin-bottom: 20px;
+    margin-bottom:10px;
     text-align: center;
     cursor: pointer;
   }

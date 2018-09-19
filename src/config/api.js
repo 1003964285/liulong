@@ -14,8 +14,10 @@ export const login = data => axios('/authentication/form',data,1);
 export const totalClass = data => axios('/course/project/total/class',data,1, "GET");
 
 //按月获取课时
-export const classByMonth = data => axios('/course/project/class/detail/' + data,{},1, "GET");
+export const classByMonth = data => axios('/course/project/class/month/' + data,{},1, "GET");
 
+//按月获取课时
+export const saveClasses = data => axios('/course/project/classes' , data,1, "PUT");
 
 
 

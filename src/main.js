@@ -10,19 +10,15 @@ import ElementUI from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/fonts/iconfont.css'
+import './src/config/tools.js'
+import Ts from './src/config/tools.js'
 
-//引入富文本编辑框
-//import  VueQuillEditor from 'vue-quill-editor'
-//import 'quill/dist/quill.js'
-//import 'quill/dist/quill.core.css'
-//import 'quill/dist/quill.snow.css'
-//import 'quill/dist/quill.bubble.css'
-//Vue.use(VueQuillEditor)
 
 
 
 Vue.use(ElementUI);
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.prototype.Ts = Ts;
 
 /* eslint-disable no-new */
 new Vue({
