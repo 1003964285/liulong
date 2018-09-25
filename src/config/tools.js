@@ -30,3 +30,12 @@ export default class Ts{
 		return newstr;
 	}
 }
+
+export let D = {
+	listType:[
+		{value:'1',label:'未安排'},
+		{value:'2',label:'待上课'},
+		{value:'3',label:'已完成'},
+		{value:'4',label:'已退课'},
+	]
+}

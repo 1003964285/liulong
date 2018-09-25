@@ -14,7 +14,7 @@
 			<div class="content" id="content">
 				<transition mode="out-in" name='fade'>
 					<rili v-if="leftData[0].check"></rili>
-					<jilu v-if="leftData[1].check"></jilu>
+					<list v-if="leftData[1].check"></list>
 					<zujian v-if="leftData[2].check"></zujian>
 				</transition>
 			</div>
@@ -27,20 +27,20 @@
 </style>
 <script>
 	import rili from '@/pages/rili.vue';
-	import jilu from '@/pages/jilu.vue';
+	import list from '@/pages/list.vue';
 	import zujian from '@/pages/zujian.vue';
   export default {
     data() {
       return {
         leftData:[
-        	{name:'课程表',icon:"icon-rili",check:true},
-        	{name:'列表',icon:"icon-xuexishuben",check:false},
+        	{name:'课程表',icon:"icon-rili",check:false},
+        	{name:'列表',icon:"icon-xuexishuben",check:true},
         	{name:'组件',icon:"icon-yuangongzhanghaoguanli",check:false},
         ]
       };
     },
     components: {
-			rili,jilu,zujian
+			rili,list,zujian
 		},
     created(){
 

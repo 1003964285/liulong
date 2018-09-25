@@ -6,7 +6,7 @@ Vue.use(Router)
 const test = r => require.ensure([], () => r(require('@/pages/test')), 'test')
 const shouye = r => require.ensure([], () => r(require('@/pages/shouye')), 'shouye')
 const rili = r => require.ensure([], () => r(require('@/pages/rili')), 'rili')
-const jilu = r => require.ensure([], () => r(require('@/pages/jilu')), 'jilu')
+const list = r => require.ensure([], () => r(require('@/pages/list')), 'list')
 const zujian = r => require.ensure([], () => r(require('@/pages/zujian')), 'zujian')
 
 export default new Router({
@@ -19,7 +19,7 @@ export default new Router({
 		//日历
 		{path: 'rili',name: 'rili',component: rili},
 		//授课记录
-		{path: 'jilu',name: 'jilu',component: jilu},
+		{path: 'list',name: 'list',component: list},
 		//组件页
 		{path: 'zujian',name: 'zujian',component: zujian},
 		

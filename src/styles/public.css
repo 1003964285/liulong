@@ -70,3 +70,13 @@
     background:#1890FF;
     color:#FFFFFF;
 }
+
+
+/*超出显示  ...*/
+	.detail{
+		overflow: hidden; 
+		text-overflow: ellipsis;/*文字隐藏后添加省略号*/
+		white-space: nowrap;/*强制不换行*/
+		width:100%;/*不允许出现半汉字截断*/
+		text-align:center;
+	}
