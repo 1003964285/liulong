@@ -10,8 +10,7 @@ import ElementUI from 'element-ui'
 
 import 'element-ui/lib/theme-chalk/index.css'
 import './styles/fonts/iconfont.css'
-import './src/config/tools.js'
-import Ts from './src/config/tools.js'
+import Ts,{D} from '@/config/tools.js'
 
 
 
@@ -19,6 +18,7 @@ import Ts from './src/config/tools.js'
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 Vue.prototype.Ts = Ts;
+Vue.prototype.D = D;
 
 /* eslint-disable no-new */
 new Vue({
