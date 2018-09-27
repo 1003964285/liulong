@@ -1,23 +1,65 @@
 <!doctype html>
 <html>
-    <head>
-        <title>QRCode</title>
-    </head>
-    <body>
-        <div>  
-        </div>
-   
-       
-    </body>
-    <script >
-    	// /[^0-9A-Za-z\u4e00-\u9ef8]/
-    var s = "u4e00-"+"u9ef8" 
-    let l = 'A-Za-z';
-		console.log(s.toString()+l)
-    	
-    	
-    	
-    	
-    	
-    </script>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+
+	<body>
+		<div id="box">
+			
+		</div>
+	</body>
+	<script type="text/javascript">
+//		let arr = [
+//			{name:'1'},
+//			{name:'2'},
+//			{name:'3'},
+//		]
+//		let res = [
+//			{name:'2',s:3},
+//		]
+
+
+//		let ss = {name:'xiaomiao',age:12};
+//		let sss = {name:'小明',wan:'wangba'}
+//			
+//		
+//		console.log(s);
+//		let a = arr[1];
+//		let b = arr[2];
+//		[a,b] = [b,a];
+//			console.log(typeof (...arr))
+
+//			function s({a=1,b=2}={}){
+//				console.log(a,b)
+//			}
+//			s({b:0})
+
+//				function f(...a){
+//					console.log(a.sort())
+//				}
+//				f(2,4,3,7,5,1,'da','kd','a')
+
+				let pr = new Promise((re,er)=>{
+					9==10?re('cc'):er('ss')
+				});
+				pr.then(res=>{
+					console.log(res);
+				})
+				
+				let promise = new Promise((res,err)=>{
+					9==10?res('cc'):err('s')
+				});
+				promise.then(res=>{
+					console.log(res);
+				})
+				
+			Promise.catch(err=>{
+				console.log(err)
+			})
+
+
+
+	</script>
 </html>
