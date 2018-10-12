@@ -1,28 +1,252 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 	<head>
-		<meta charset="utf-8">
-		<title></title>
+		<meta charset="UTF-8">
+		<title>Title</title>
+		<style type="text/css">
+			*{
+				margin:0;
+				padding: 0;
+			}
+			/*.left,.right {
+				height:500px;
+				width:100px;
+				background: red;
+				float: left;
+			}
+			.right{
+				float:right
+			}
+			.center {
+				height:600px;
+				margin:0 100px;
+				background: green;
+			}*/
+			
+			
+			/*.left,.right{
+				height:500px;
+				width:100px;
+				background: red;
+				position: absolute;
+				top: 0;
+			}
+			.left{
+				left: 0;
+			}
+			.right{
+				right:0px;
+			}
+			.center {
+				height:600px;
+				margin:0 100px;
+				background: green;
+			}*/
+			.san {
+				/*display: inline-block;*/
+				border-top:50px rgba(0,0, 0, 0 ) solid; 
+				border-bottom:50px rgba(0, 0, 0,0 ) solid; 
+				border-left:50px red solid;
+			}
+		</style>
 	</head>
-		
+
 	<body>
-		<div id="box">
-			Math max apply min random parseInt <br />
-			.push .pop .unshift .shift .splice(2,1) [...new Set(arr)] .sort(function(a,b){return a-b}) .sort(function(){return 0.5-Math.random()}) .join()<br />
-			.indexOf()  .replace()   .slice()   .split()
-		</div>
+		<div class="left zuoyou"></div>
+		<div class="right zuoyou"></div>
+		<div class="center"></div>
+		<div class="san"></div>
 	</body>
 	<script type="text/javascript">
-		//Math对象方法
-		let arr = [4,2,7,4,3,8,2,1,12];
-			
-			
-			
-		//数组方法我是一个中国人得好人对的是的你好
-		console.log(arr)
-		console.log(arr)
-		console.log(arr)
-		console.log()
-		console.log()
+		
+		//查找字符串重复
+//		var str = 'ojfirfreee';
+//		console.log(maxStr(str));
+//		function maxStr(str){
+//			var s = {};
+//			for(var i=0;i<str.length;i++){
+//				s[str[i]] ? s[str[i]]++ : s[str[i]]=1;
+//			}
+//			var max = [{num:0}];
+//			for(var j in s){
+//				if(s[j]>max[0].num){
+//					max = [];
+//					max.push({str:j,num:s[j]})
+//				}else if(s[j]==max[0].num){
+//					max.push({str:j,num:s[j]})
+//				}
+//			}
+//			return  max;
+//		}
+		
+		
+//		var a = 11;
+//		function test(){
+//			this.a = 22;
+//			var b = function (){
+//				console.log(this.a);//22
+//			}
+//			console.log(this.a)//11
+//		    b();
+//		}
+//		var s = new test();
+//		console.log(s)
+
+
+//		function fn(){
+//			this.a = 0;
+//			this.b = function(){
+//				console.log(this.a)
+//				//console.log('1')
+//			}
+//		}
+//		fn.prototype = {
+//			b:function (){
+//				//console.log('2')
+//				this.a = 20;
+//				console.log(this.a)
+//			},
+//			c:function (){
+//				this.a = 30;
+//				console.log(this.a)
+//			},
+//		}
+//		var myFn = new fn();
+//		myFn.b();//0
+//		myFn.c();//30
+		
+		
+		
+//		var length = 10;
+//		function fn(){
+//			console.log(this)
+//			console.log(this.length)
+//		}
+//		var obj = {
+//			length:5,
+//			s:function (fn){
+//				fn.call(this);//5
+//				arguments[0]();//10
+//				console.log(arguments)
+//			}
+//		}
+//		obj.s(fn,"3");
+
+		
+//		function fn(){
+//			var a = 0;
+//			c = 8;
+//			b = function (){
+//			 	console.log(a)
+//			}
+//		}
+//		fn()
+//		var a = 1;
+//		console.log(c)
+//		b();
+
+
+
+//		 function fun(n,o){
+//		    console.log(o);
+//		    return {
+//		        fun:function(m){
+//		            return fun(m,n);
+//		        }
+//		    };
+//		 }
+//		 var a = fun(0);//undefind   
+//		 a.fun(1);//0  1
+//		 a.fun(2);
+//		 a.fun(3);
+//		 var b = fun(0).fun(1).fun(2).fun(3);
+//		 var c = fun(0).fun(1);
+//		 c.fun(2);
+//		 c.fun(3);
+
+		
+//		function b() {
+//	    }
+//	    let b
+//	    console.log(typeof b)
+//	    Go:{
+//	    	b:fun,
+//	    }
+	    
+	    
+//	    var c = 1
+//	    function c(c) {
+//	        console.log(c)
+//	        var c = 3
+//	    }
+//	    console.log(c) // 1
+//	    console.log(typeof c) // number
+//	    var c = (6,'a')
+//	    console.log(c)
+	    
+//		var a = 6  
+//	    setTimeout(function () {  
+//	        console.log(0)  
+//	        console.log(a)  
+//	        a = 666  
+//	    }, 0)      
+//	    console.log(1)  
+//	    a = 66
+		
+//		var obj = {
+//			a:function(){
+//				return '1'
+//			},
+//			b:function(){
+//				return '2'
+//			}
+//		}
+//		function fn(a) {
+//			console.log(a)
+//		}
+//	    fn((obj.a(),obj.b()))
+
+
+		//catch的形参是私有变量
+//		(function () {
+//		    try {
+//		        throw new Error();
+//		    } catch (x) {
+//		        var x = 1,y = 2;
+//		        console.log(x);
+//		    }
+//		    console.log(x);
+//		    console.log(y);
+//		})();
+
+
+		//name 是系统自定义属性
+//		obj = {
+//		    name: 'a',
+//		    getName : function () {
+//		        console.log(this.name);
+//		    }
+//		}
+//		var fn = obj.getName
+//		obj.getName()
+//		var fn2 = obj.getName()
+//		fn() 
+//		fn2()
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	</script>
 </html>
